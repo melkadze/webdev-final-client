@@ -63,6 +63,10 @@ export const fetchAllStudentsThunk = () => async (dispatch) => {  // The THUNK
 // THUNK CREATOR:
 export const addStudentThunk = (student) => async (dispatch) => {  // The THUNK
   try {
+      if (!student.imageUrl) {
+          student.imageUrl = "https://www.onlinelabels.com/API/Clipart/DownloadClipart?ClipArtID=127640&FileExtension=png"
+      }
+      
     // API "post" call to add "student" object's data to database
     let res = await axios.post(`/api/students`, student);  
     // Call Action Creator to return Action object (type + payload with new students data)
