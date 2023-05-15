@@ -9,8 +9,7 @@ import Header from './Header';
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStudentThunk,
-        deleteStudentThunk
-} from "../../store/thunks";
+         deleteStudentThunk } from "../../store/thunks";
 import { StudentView } from "../views";
 
 class StudentContainer extends Component {
