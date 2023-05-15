@@ -9,13 +9,18 @@ import { useHistory } from 'react-router-dom';
 
 // Take in props data to construct the component
 const CampusView = (props) => {
-  const {campus, deleteCampus} = props;
-      
-      var userHistory = useHistory()
-      const deleteCampusAndRedirect = (campusId) => {
-          deleteCampus(campusId)
-          userHistory.push("/campuses")
-      }
+  const {campus, deleteCampus, deleteStudent, fetchCampus} = props;
+    
+    var userHistory = useHistory()
+    const deleteStudentAndRefresh = (studentId) => {
+        deleteStudent(studentId)
+        props.fetchCampus(campus.id)
+    }
+    
+    const deleteCampusAndRedirect = (campusId) => {
+        deleteCampus(campusId)
+        userHistory.push("/campuses")
+    }
     
     if (!campus.students.length) {
         // Render a single Campus view with list of its students
@@ -48,9 +53,12 @@ const CampusView = (props) => {
                             <Link to={`/student/${student.id}`}>
                             <h2>{name}</h2>
                             </Link>
+                            <button onClick={() => deleteStudentAndRefresh(student.id)}>Delete Student</button>
                             </div>
                             );
                 })}
+                <br></br>
+                <br></br>
                 <Link to={`/campus/edit/${campus.id}`}>
                   <button>Edit Campus</button>
                 </Link>
