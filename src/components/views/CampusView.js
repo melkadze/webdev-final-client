@@ -11,12 +11,14 @@ import { useHistory } from 'react-router-dom';
 const CampusView = (props) => {
   const {campus, deleteCampus, deleteStudent} = props;
     
-    var userHistory = useHistory()
+    // Refresh campus (and its students) once student is deletes
     const deleteStudentAndRefresh = (studentId) => {
         deleteStudent(studentId)
         props.fetchCampus(campus.id)
     }
     
+    // Go back to all campuses view once a campus is deleted
+    var userHistory = useHistory()
     const deleteCampusAndRedirect = (campusId) => {
         deleteCampus(campusId)
         userHistory.push("/campuses")

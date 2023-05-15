@@ -46,13 +46,15 @@ class EditStudentContainer extends Component {
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
-
+      
     let student = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
-        campusId: this.state.campusId,
+        // use the ternary to ensure a null gets sent if the campusId is empty
+        campusId: (this.state.campusId !== "") ? this.state.campusId : null,
         email: this.state.email,
-        gpa: this.state.gpa,
+        // use the ternary to ensure a null gets sent if the gpa is empty
+        gpa: (this.state.gpa !== "") ? this.state.gpa : null,
         imageUrl: this.state.imageUrl,
         id: this.props.match.params.id // use a prop as this should not be changed
     };

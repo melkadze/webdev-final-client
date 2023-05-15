@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
 
 const AllStudentsView = (props) => {
   const {students, deleteStudent} = props;
-  // If there is no student, display a message
+  // If there is no student, display a message with a button to add
   if (!students.length) {
     return (
     <div>
-      <p>There are no students.</p>
+      <h3>There are no students.</h3>
       <Link to={`newstudent`}>
         <button>Add New Student</button>
       </Link>

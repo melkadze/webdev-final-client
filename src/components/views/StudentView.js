@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 const StudentView = (props) => {
   const { student, deleteStudent } = props;
     
+    // Go back to all students view once a student is deleted
     var userHistory = useHistory()
     const deleteStudentAndRedirect = (studentId) => {
         deleteStudent(studentId)
