@@ -5,11 +5,22 @@ The Views component is responsible for rendering web page with data provided by 
 It constructs a React component to display a single campus and its students (if any).
 ================================================== */
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 // Take in props data to construct the component
 const CampusView = (props) => {
-  const {campus} = props;
+  const {campus, deleteCampus, deleteStudent} = props;
     
+    var userHistory = useHistory()
+    const deleteStudentAndRefresh = (studentId) => {
+        deleteStudent(studentId)
+        props.fetchCampus(campus.id)
+    }
+    
+    const deleteCampusAndRedirect = (campusId) => {
+        deleteCampus(campusId)
+        userHistory.push("/campuses")
+    }
     
     if (!campus.students.length) {
         // Render a single Campus view with list of its students
@@ -20,6 +31,14 @@ const CampusView = (props) => {
                 <p>{campus.address}</p>
                 <p>{campus.description}</p>
                 <h2>There are no enrolled students.</h2>
+                <Link to={`/students`}>
+                  <button>Select Students to Add to Campus</button>
+                </Link>
+                <br></br>
+                <Link to={`/campus/edit/${campus.id}`}>
+                  <button>Edit Campus</button>
+                </Link>
+                <button onClick={() => deleteCampusAndRedirect(campus.id)}>Delete</button>
                 </div>
                 );
     } else {
@@ -38,9 +57,20 @@ const CampusView = (props) => {
                             <Link to={`/student/${student.id}`}>
                             <h2>{name}</h2>
                             </Link>
+                            <button onClick={() => deleteStudentAndRefresh(student.id)}>Delete Student</button>
                             </div>
                             );
                 })}
+                <br></br>
+                <br></br>
+                <Link to={`/students`}>
+                  <button>Select Students to Add to Campus</button>
+                </Link>
+                <br></br>
+                <Link to={`/campus/edit/${campus.id}`}>
+                  <button>Edit Campus</button>
+                </Link>
+                <button onClick={() => deleteCampusAndRedirect(campus.id)}>Delete</button>
                 </div>
                 );
     }

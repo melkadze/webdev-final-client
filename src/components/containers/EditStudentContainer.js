@@ -59,6 +59,7 @@ class EditStudentContainer extends Component {
     
     // Edit student in back-end database
     let editedStudent = await this.props.editStudent(student);
+    console.log(await editedStudent)
 
     // Update state, and trigger redirect to show the edited student
     this.setState({
