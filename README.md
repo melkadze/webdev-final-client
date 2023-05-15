@@ -15,6 +15,7 @@ It supports the following actions:
 
 Some of the technologies it uses are below:
 * React
+* Node
 * React Router
 * React Redux
 * Redux Thunk
