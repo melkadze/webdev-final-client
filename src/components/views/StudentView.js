@@ -24,6 +24,10 @@ const StudentView = (props) => {
                 <p>{student.gpa}</p>
                 <p>{student.email}</p>
                 <h3>This student is currently not enrolled anywhere.</h3>
+                <Link to={`/student/edit/${student.id}`}>
+                  <button>Edit Student</button>
+                </Link>
+                <button onClick={() => deleteStudentAndRedirect(student.id)}>Delete</button>
                 </div>
                 );
     } else {
