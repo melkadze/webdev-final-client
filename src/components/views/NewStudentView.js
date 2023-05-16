@@ -37,6 +37,10 @@ const useStyles = makeStyles( () => ({
 const NewStudentView = (props) => {
   const {handleChange, handleSubmit } = props;
   const classes = useStyles();
+    
+  // so that we can use queryParameters.get("campusId") to support adding student to specific campus found in url parameter
+  const queryParameters = new URLSearchParams(window.location.search)
+  const paramsCampusId = queryParameters.get("campusId")
 
   // Render a New Student view with an input form
   return (
@@ -62,7 +66,7 @@ const NewStudentView = (props) => {
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
-            <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
+            <input defaultValue={paramsCampusId} type="text" name="campusId" onChange={(e) => handleChange(e)} />
             <br/>
             <br/>
           
@@ -71,8 +75,10 @@ const NewStudentView = (props) => {
           <br/>
           <br/>
           
+          {/* We make the email field pass the default campusId as it must be set by the user, forcing the handleChange to run
+              (we cannot put this in the campusId field itself, as the user will not change it, thus the change will not be hanldled */}
           <label style={{color:'#11153e', fontWeight: 'bold'}}>E-mail: </label>
-          <input type="email" name="email" required onChange={(e) => handleChange(e)} />
+          <input type="email" name="email" required onChange={(e) => handleChange(e, paramsCampusId)} />
           <br/>
           <br/>
           

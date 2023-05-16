@@ -65,9 +65,14 @@ const CampusView = (props) => {
                 })}
                 <br></br>
                 <br></br>
-                <Link to={`/students`}>
-                  <button>Select Students to Add to Campus</button>
+                <Link to={`/newstudent?campusId=${campus.id}`}>
+                  <button>Add New Student to Campus</button>
                 </Link>
+                <br></br>
+                <Link to={`/students`}>
+                  <button>Select Existing Students to Add to Campus</button>
+                </Link>
+                <br></br>
                 <br></br>
                 <Link to={`/campus/edit/${campus.id}`}>
                   <button>Edit Campus</button>
