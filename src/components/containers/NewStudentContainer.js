@@ -30,10 +30,19 @@ class NewStudentContainer extends Component {
   }
 
   // Capture input data when it is entered
-  handleChange = event => {
+  handleChange = (event, defaultCampusId = null) => {
     this.setState({
       [event.target.name]: event.target.value
     });
+      
+      console.log(defaultCampusId)
+      
+      if (defaultCampusId) {
+        this.setState({
+          campusId: defaultCampusId
+        });
+          console.log("EEEE")
+      }
   }
 
   // Take action after user click the submit button
